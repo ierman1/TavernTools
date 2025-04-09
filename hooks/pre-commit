@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# This pre-commit hook checks for PHP code style and quality using PHPCS and PHPMD.
+# It runs on files that are staged for commit.
+# Make sure to have PHPCS and PHPMD installed via Composer.
+# Usage: Place this script in the .git/hooks directory and make it executable.
+
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.php$')
+
+if [ -z "$FILES" ]; then
+  echo "No PHP files found to check."
+  exit 0
+fi
+
+HAS_ERRORS=0
+
+echo "🔍 Running PHPCS..."
+for FILE in $FILES; do
+  ./vendor/bin/phpcs "$FILE"
+  if [ $? -ne 0 ]; then
+    HAS_ERRORS=1
+  fi
+done
+
+echo "🧹 Running PHPMD..."
+for FILE in $FILES; do
+  ./vendor/bin/phpmd "$FILE" text ../../phpmd_ruleset.xml
+  if [ $? -ne 0 ]; then
+    HAS_ERRORS=1
+  fi
+done
+
+if [ $HAS_ERRORS -ne 0 ]; then
+  echo "❌ Errors found. Fix them before commit."
+  exit 1
+fi
+
+echo "✅ Clean code. Proceed with commit."
+exit 0
