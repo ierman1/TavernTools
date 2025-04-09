@@ -24,7 +24,7 @@ done
 
 echo "🧹 Running PHPMD..."
 for FILE in $FILES; do
-  ./vendor/bin/phpmd "$FILE" text ../../phpmd_ruleset.xml
+  php -d error_reporting=E_ERROR ./vendor/bin/phpmd "$FILE" text ./phpmd_ruleset.xml
   if [ $? -ne 0 ]; then
     HAS_ERRORS=1
   fi
