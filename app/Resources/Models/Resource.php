@@ -4,6 +4,7 @@ namespace App\Resources\Models;
 
 use Database\Factories\ResourceFactory;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
+use \Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Users\Models\User;
@@ -35,6 +36,11 @@ class Resource extends Model
     protected static function newFactory(): ResourceFactory
     {
         return new ResourceFactory();
+    }
+
+    public function resourceable(): MorphTo
+    {
+        return $this->morphTo();
     }
 
 }
