@@ -21,11 +21,21 @@ class Sheet extends Model
 
     ];
 
+    /**
+     * Return the factory for the model.
+     *
+     * @return SheetFactory
+     */
     protected static function newFactory(): SheetFactory
     {
         return new SheetFactory();
     }
 
+    /**
+     * The resourceable model.
+     *
+     * @return MorphTo
+     */
     public function resource(): MorphOne
     {
         return $this->morphOne(Resource::class,"resourceable");

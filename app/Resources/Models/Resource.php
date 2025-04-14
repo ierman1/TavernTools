@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Resources\Models;
 
 use Database\Factories\ResourceFactory;
@@ -23,11 +22,16 @@ class Resource extends Model
 
     ];
 
-
+    /**
+     * Creator of the resource.
+     *
+     * @return BelongsTo
+     */
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'creator_id');
     }
+
     /**
      * Return the factory for the model.
      * 
@@ -38,6 +42,11 @@ class Resource extends Model
         return new ResourceFactory();
     }
 
+    /**
+     * The resourceable model.
+     *
+     * @return MorphTo
+     */
     public function resourceable(): MorphTo
     {
         return $this->morphTo();

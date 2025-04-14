@@ -19,7 +19,7 @@ class SheetFactory extends Factory
     public function definition(): array
     {
         return [
-            'path' => fake()->words(1,true),
+            'path' => fake()->words(1, true),
         ];
     }
 }

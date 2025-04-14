@@ -15,18 +15,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
+        User::factory()->create(
+            [
             'name' => 'Test User',
             'email' => 'test@example.com',
-        ]);
+            ]
+        );
         //User::factory(10)->create();
-        Resource::factory(10)->create([
+        Resource::factory(10)->create(
+            [
             'creator_id' => 1,
             'resourceable_type' => Sheet::class,
 
-        ])->each(function ($resource) {
-            $resource->resourceable()->save(Sheet::factory()->create());
-        });
+            ]
+        )->each(
+            function ($resource) {
+                $resource->resourceable()->save(Sheet::factory()->create());
+            }
+        );
 
         
     }
