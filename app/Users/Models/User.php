@@ -7,13 +7,14 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use \Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Resources\Models\Resource;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -48,13 +49,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     public function resources(): HasMany
     {
         return $this->hasMany(Resource::class, 'creator_id');
     }
+
     /**
      * Return the factory for the model.
-     * 
+     *
      * @return UserFactory
      */
     protected static function newFactory(): UserFactory
