@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="TavernToolsDevRuleset">
+    <description>PHPCS Ruleset configuration</description>
+
+    <!-- Base standard -->
+    <rule ref="PSR12" />
+
+    <!-- Applied rules -->
+    <exclude name="Generic.Files.DocComment" />
+    <exclude name="Squiz.Commenting.ClassComment" />
+    <exclude name="Squiz.Commenting.FileComment" />
+</ruleset>
