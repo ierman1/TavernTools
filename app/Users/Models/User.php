@@ -48,9 +48,25 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * The resources that belong to the user.
+     * 
+     * @return HasMany<Resource>
+     */
     public function resources(): HasMany
     {
         return $this->hasMany(Resource::class, 'creator_id');
+    } 
+
+    /**
+     * The collections that belong to the user.
+     * 
+     * @return HasMany<Collection>
+     */
+    public function collections(): HasMany
+    {
+        return $this->hasMany(Collection::class, 'owner_id');
     }
     /**
      * Return the factory for the model.
